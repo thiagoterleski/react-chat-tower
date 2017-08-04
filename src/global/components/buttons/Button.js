@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, css } from 'aphrodite/no-important'
 
 const styles = StyleSheet.create({
@@ -6,6 +7,7 @@ const styles = StyleSheet.create({
     border: '0 none',
     backgroundColor: 'transparent',
     outline: 'none',
+    padding: 0,
   },
 });
 

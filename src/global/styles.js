@@ -2,9 +2,9 @@ import { StyleSheet, css } from 'aphrodite/no-important'
 
 const GlobalStyles = StyleSheet.create({
   bodyText: {
-    fontFamily: ['Droid Sans Mono', "monospace"],
+    fontFamily: ['Lato', "sans-serif"],
     fontSize: 14,
-    color: 'rgba(0, 0, 0, 0.7)',
+    color: 'rgba(0, 0, 0, 0.5)',
   }
 })
 
