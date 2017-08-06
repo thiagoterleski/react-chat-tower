@@ -53,7 +53,7 @@ const Window = (props) => {
     <div className={css(styles.window)}>
       <div className={css(styles.lintel)} />
       <div className={css(styles.sash)}>
-        { 1 === 3 && (
+        { props.user && (
           <img className={css(styles.user)} src={Boy} width={36} />
         ) }
         <div className={css(styles.sashOpen)} />

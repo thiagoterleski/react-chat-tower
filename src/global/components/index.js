@@ -1,4 +1,6 @@
+export { default as Dialog } from './dialog/Dialog'
 export { default as Landscape } from './landscape/Landscape'
 export { default as Tower } from './tower/Tower'
+export { default as Button } from './buttons/Button'
 export { default as ChatButton } from './buttons/ChatButton'
 export { default as ChooseAvatarButton } from './buttons/ChooseAvatarButton'

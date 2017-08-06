@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     transition: 'all .4s cubic-bezier(0.0, 0.0, 0.2, 1)',
     transform: 'perspective(80px) skewY(0deg)rotateX(-1deg)',
     transformOrigin: 'bottom center',
+    position: 'relative',
   },
   floor: {
     width: 150,
@@ -37,7 +38,23 @@ const styles = StyleSheet.create({
       marginLeft: 5,
       backgroundColor: '#9ea7b1',
     }
-  }
+  },
+  bush: {
+    backgroundColor: '#009688',
+    position: 'absolute',
+    bottom: 0,
+    right: -20,
+    width: 40,
+    height: 25,
+    borderRadius: '100px 100px 0 0',
+    ':before': {
+      content: '""',
+      backgroundColor: '#00796B',
+      width: 40,
+      height: 25,
+      borderRadius: '100px 100px 0 0',
+    }
+  },
 });
 
 class Tower extends Component {
@@ -48,10 +65,9 @@ class Tower extends Component {
           <div className={css(styles.antenna)} />
         </div>
         <UpperFloor />
-        <UpperFloor />
-        <UpperFloor />
-        <UpperFloor />
         <UpperFloor firstFloor />
+        <div className={css(styles.bush)} />
+        <div className={css(styles.bush)} style={{ right: 'auto', left: -20 }} />
       </div>
     )
   }

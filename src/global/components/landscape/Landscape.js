@@ -24,20 +24,6 @@ const styles = StyleSheet.create({
     width: '100%',
     bottom: 5,
   },
-  bush: {
-    backgroundColor: '#009688',
-    width: 40,
-    height: 25,
-    borderRadius: '100px 100px 0 0',
-    position: 'relative',
-    ':before': {
-      content: '""',
-      backgroundColor: '#00796B',
-      width: 40,
-      height: 25,
-      borderRadius: '100px 100px 0 0',
-    }
-  },
 });
 
 const Landscape = (props) => {
@@ -45,7 +31,6 @@ const Landscape = (props) => {
     <div className={css(styles.landscape)}>
       { props.children }
       <div className={css(styles.overFloor)}>
-        <div className={css(styles.bush)} />
       </div>
       <div className={css(styles.floor)} />
     </div>

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 const ChatButton = (props) => {
   return (
     <div className={props.containerStyle || null}>
-      <Button>
+      <Button onClick={props.onClick}>
         <img src={Icon} width={48} height={48} />
       </Button>
     </div>

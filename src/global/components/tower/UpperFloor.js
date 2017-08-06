@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     ':before': {
       content: '""',
-      height: 5,
+      height: 3,
       width: '100%',
       position: 'absolute',
       top: 0,
