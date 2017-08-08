@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#F5F5F5',
     padding: 20,
+    filter: 'contrast(1)',
   },
   container: {
     background: 'linear-gradient(#d6e5ff, #82B1FF)',
@@ -76,7 +77,7 @@ class App extends Component {
     this.state = {
       isConnected: false,
       isInputModalOpen: false,
-      users: {},
+      users: [],
       userName: '',
     }
   }
@@ -102,7 +103,7 @@ class App extends Component {
   }
   handleSubmit = (event) => {
     event.preventDefault()
-    this.setState({ isInputModalOpen: false }, () => {
+    this.setState({ isInputModalOpen: false, isConnected: true }, () => {
       socket.emit('join', this.state.userName);
     })
   }
@@ -148,12 +149,24 @@ class App extends Component {
             <ChatButton onClick={(event) => this.handleChatButton()} />
           </div>
         ) }
+        <div style={{ position: 'fixed', top: 50, left: 50, zIndex: 9 }} >
+          <Button
+            onClick={(e) => {
+              const uid = new Date().getUTCMilliseconds()
+              const newUsers = this.state.users.concat({ id: uid, name: Math.random().toString(36).substring(7) })
+              this.setState({ users: newUsers })
+            }}
+            accent
+            label={'Add new client'}
+          />
+        </div>
         <div className={css(styles.primaryButton)} >
+
         <Button
           onClick={this.handleJoinButton}
           containerStyle={css(styles.joinButton)}
           accent
-          label={'Join to chat'}
+          label={(this.state.isConnected) ? 'Disconnect' : 'Join to chat'}
           icon={Bubble}
         />
         </div>

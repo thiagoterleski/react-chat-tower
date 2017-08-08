@@ -1,6 +1,16 @@
 import React, { Component } from 'react'
 import { StyleSheet, css } from 'aphrodite/no-important'
+import { shallowEqual } from 'recompose'
 import UpperFloor from './UpperFloor'
+
+Object.defineProperty(Array.prototype, 'chunk', {
+  value: function(chunkSize) {
+    var that = this;
+    return Array(Math.ceil(that.length / chunkSize)).fill().map(function(_,i){
+      return that.slice(i * chunkSize, i * chunkSize + chunkSize)
+    });
+  }
+})
 
 const styles = StyleSheet.create({
   tower: {
@@ -58,13 +68,36 @@ const styles = StyleSheet.create({
 });
 
 class Tower extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return !shallowEqual(nextProps.users, this.props.users)
+  }
+  componentDidUpdate(prevProps, prevState) {
+    // console.count('Tower::componentDidUpdate')
+  }
+
+  renderFloors = () => {
+    const items = []
+    const { users } = this.props
+    const numFloors = Math.ceil(users.length / 2)
+
+    if (users.length === 0)
+      return <UpperFloor />
+
+    return users.chunk(2).reverse().map((group, i) => {
+      return <UpperFloor users={group} key={`UpperFloor_${i}`}  />
+    })
+
+  }
+
   render() {
+
+
     return (
       <div className={css(styles.tower)}>
         <div className={css(styles.towerTop)}>
           <div className={css(styles.antenna)} />
         </div>
-        <UpperFloor />
+        { this.renderFloors() }
         <UpperFloor firstFloor />
         <div className={css(styles.bush)} />
         <div className={css(styles.bush)} style={{ right: 'auto', left: -20 }} />

@@ -67,14 +67,15 @@ const styles = StyleSheet.create({
 });
 
 const UpperFloor = (props) => {
+  const { users } = props
 
   return (
     <div className={css(styles.upperFloor)}>
       <div className={css(styles.cornice)} />
       <div className={css(styles.apartment, props.firstFloor ? styles.firstFloor : null )}>
         { !props.firstFloor ? ([
-          <Window key={'window1'} />,
-          <Window key={'window2'} />
+          <Window user={(users.length) ? users[0] : null} />,
+          <Window user={(users.length === 2) ? users[1] : null} />,
         ]) : (
           <div className={css(styles.door)}>
             <div className={css(styles.doorDivision)} />
@@ -89,10 +90,12 @@ const UpperFloor = (props) => {
 
 UpperFloor.defaultProps = {
   firstFloor: false,
+  users: [],
 }
 
 UpperFloor.propTypes = {
   firstFloor: PropTypes.bool,
+  users: PropTypes.array,
 }
 
 export default UpperFloor
