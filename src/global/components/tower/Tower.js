@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     display: 'inline-flex',
     flexDirection: 'column',
     transition: 'all .4s cubic-bezier(0.0, 0.0, 0.2, 1)',
-    transform: 'perspective(80px) skewY(0deg)rotateX(-1deg)',
+    transform: 'perspective(80px) skewY(0deg)rotateX(0)',
     transformOrigin: 'bottom center',
     position: 'relative',
   },
