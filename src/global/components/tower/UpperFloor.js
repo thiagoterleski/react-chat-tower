@@ -74,8 +74,8 @@ const UpperFloor = (props) => {
       <div className={css(styles.cornice)} />
       <div className={css(styles.apartment, props.firstFloor ? styles.firstFloor : null )}>
         { !props.firstFloor ? ([
-          <Window user={(users.length) ? users[0] : null} />,
-          <Window user={(users.length === 2) ? users[1] : null} />,
+          <Window key={'window1'} user={(users.length) ? users[0] : null} />,
+          <Window key={'window2'} user={(users.length === 2) ? users[1] : null} />,
         ]) : (
           <div className={css(styles.door)}>
             <div className={css(styles.doorDivision)} />

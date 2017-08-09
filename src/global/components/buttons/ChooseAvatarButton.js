@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 const ChooseAvatarButton = (props) => {
   return (
     <div className={props.containerStyle || null}>
-      <Button>
+      <Button onClick={props.onClick}>
         <img src={Icon} width={24} height={24} />
       </Button>
     </div>

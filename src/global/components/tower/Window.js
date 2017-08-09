@@ -80,6 +80,10 @@ const Animations = {
   }),
 }
 
+const getAvatar = (avatar) => {
+  return require(`../../../assets/images/avatars/${avatar}.png`)
+}
+
 class Window extends Component {
   constructor() {
     super()
@@ -110,7 +114,7 @@ class Window extends Component {
               <VelocityComponent animation={(this.state.isOpen) ? Animations.up : Animations.down} duration={500}>
                 <SpeechBubble text={user.name} />
               </VelocityComponent>
-              <img className={css(styles.userImg)} src={Boy} width={36} />
+              <img className={css(styles.userImg)} src={getAvatar(user.avatar)} width={36} />
             </div>
           ) }
           <div className={css(styles.sashOpen)} />

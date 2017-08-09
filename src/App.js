@@ -8,68 +8,15 @@ import Bubble from './assets/images/speech-bubble.svg'
 import User from './assets/images/user.svg'
 import { Landscape, Tower, ChatButton, ChooseAvatarButton, Button, Dialog } from './global/components'
 import { globalStyles } from './global/styles'
+import styles from './App.styles.js'
 
 const socket = io('http://localhost:4001')
 
-const styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: '#F5F5F5',
-    padding: 20,
-    filter: 'contrast(1)',
-  },
-  container: {
-    background: 'linear-gradient(#d6e5ff, #82B1FF)',
-    height: 'calc(100vh - 40px)',
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
-    transition: 'all .4s cubic-bezier(0.0, 0.0, 0.2, 1)',
-  },
-  disabled: {
-    pointerEvents: 'none',
-  },
-  topBar: {
-    display: 'flex',
-    padding: 16,
-    justifyContent: 'space-between',
-  },
-  chatButton: {
-    position: 'fixed',
-    bottom: 30,
-    right: 30,
-  },
-  primaryButton: {
-    position: 'fixed',
-    bottom: 50,
-    right: 50,
-  },
-  usersStatus: {
-    position: 'fixed',
-    bottom: 50,
-    left: 50,
-  },
-  rightContent: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  avatarButton: {
-    width: 36,
-    height: 36,
-    backgroundColor: 'white',
-    borderRadius: 24,
-    display:' inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 8,
-  },
-  dialogForm: {
-    display: 'flex',
-    'flexDirection': 'column',
-  },
-  dialogInput: {
-    marginBottom: 4,
-  }
-});
+const genRandomAvatar = () => {
+  const num = Math.floor(Math.random() * (10 - 1) + 1)
+  return `user-${num}`
+
+}
 
 class App extends Component {
   constructor(props) {
@@ -79,32 +26,63 @@ class App extends Component {
       isInputModalOpen: false,
       users: [],
       userName: '',
+      currentUser: {},
     }
   }
   componentDidMount() {
     socket.on('update', (data) => {
-      console.log('update',data)
-
-      this.setState({
-        users: data.clients,
-      })
+      console.info('update',data)
+      // this data will be the new state for user
+      this.setState(data)
     })
   }
+
+
   handleChatButton(event) {
     console.log(socket)
   }
+
+  randomizeAvatar = () => {
+    const newAvatar = genRandomAvatar()
+    console.log(newAvatar)
+    socket.emit('updateAvatar', newAvatar)
+  }
+  /**
+   * [handleJoinButton description]
+   * @param  {[type]} event [description]
+   * @return {[type]}       [description]
+   */
   handleJoinButton = (event) => {
     event.preventDefault()
     this.setState({ isInputModalOpen: true })
     // socket.emit('joinChatEvent', 'world');
   }
+  /**
+   * [handleChange description]
+   * @param  {[type]} event [description]
+   * @return {[type]}       [description]
+   */
   handleChange = (event) => {
     this.setState({ userName: event.target.value })
   }
+  /**
+   * [handleSubmit description]
+   * @param  {[type]} event [description]
+   * @return {[type]}       [description]
+   */
   handleSubmit = (event) => {
     event.preventDefault()
-    this.setState({ isInputModalOpen: false, isConnected: true }, () => {
-      socket.emit('join', this.state.userName);
+    socket.emit('join', { name: this.state.userName, avatar: genRandomAvatar() });
+  }
+
+  /**
+   * [onDisconnect description]
+   * @param  {[type]} event [description]
+   * @return {[type]}       [description]
+   */
+  onDisconnect = (event) => {
+    this.setState({ isConnected: false }, () => {
+      socket.emit('logout');
     })
   }
   render() {
@@ -137,7 +115,7 @@ class App extends Component {
             </div>
             <div className={css(styles.rightContent)}>
               <span className={css(globalStyles.bodyText)}>Choose your <b>avatar</b></span>
-              <ChooseAvatarButton containerStyle={css(styles.avatarButton)} />
+              <ChooseAvatarButton onClick={this.randomizeAvatar} containerStyle={css(styles.avatarButton)} />
             </div>
           </div>
           <Landscape>
@@ -149,26 +127,24 @@ class App extends Component {
             <ChatButton onClick={(event) => this.handleChatButton()} />
           </div>
         ) }
-        <div style={{ position: 'fixed', top: 50, left: 50, zIndex: 9 }} >
-          <Button
-            onClick={(e) => {
-              const uid = new Date().getUTCMilliseconds()
-              const newUsers = this.state.users.concat({ id: uid, name: Math.random().toString(36).substring(7) })
-              this.setState({ users: newUsers })
-            }}
-            accent
-            label={'Add new client'}
-          />
-        </div>
         <div className={css(styles.primaryButton)} >
-
-        <Button
-          onClick={this.handleJoinButton}
-          containerStyle={css(styles.joinButton)}
-          accent
-          label={(this.state.isConnected) ? 'Disconnect' : 'Join to chat'}
-          icon={Bubble}
-        />
+          { (this.state.isConnected === false) ? (
+            <Button
+              onClick={this.handleJoinButton}
+              containerStyle={css(styles.joinButton)}
+              accent
+              label={'Join to chat'}
+              icon={Bubble}
+            />
+          ) : (
+            <Button
+              onClick={this.onDisconnect}
+              containerStyle={css(styles.joinButton)}
+              accent
+              label={'Disconnect'}
+              icon={Bubble}
+            />
+          ) }
         </div>
         <div className={css(styles.usersStatus)} >
           <span className={css(globalStyles.bodyText)}>
