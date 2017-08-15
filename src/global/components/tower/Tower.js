@@ -69,28 +69,27 @@ const styles = StyleSheet.create({
 
 class Tower extends Component {
   shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(nextProps.users, this.props.users)
+    return (!shallowEqual(nextProps.users, this.props.users) || (!shallowEqual(nextProps.lastUserMessage, this.props.lastUserMessage)))
   }
   componentDidUpdate(prevProps, prevState) {
-    // console.count('Tower::componentDidUpdate')
+    console.count('Tower::componentDidUpdate')
   }
 
   renderFloors = () => {
     const items = []
-    const { users } = this.props
+    const { users, lastUserMessage } = this.props
     const numFloors = Math.ceil(users.length / 2)
 
     if (users.length === 0)
       return <UpperFloor />
 
     return users.chunk(2).reverse().map((group, i) => {
-      return <UpperFloor users={group} key={`UpperFloor_${i}`}  />
+      return <UpperFloor users={group} lastUserMessage={lastUserMessage} key={`UpperFloor_${i}`}  />
     })
 
   }
 
   render() {
-
 
     return (
       <div className={css(styles.tower)}>

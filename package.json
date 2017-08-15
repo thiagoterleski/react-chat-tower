@@ -6,6 +6,7 @@
     "aphrodite": "^1.2.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-keydown": "^1.9.1",
     "react-scripts": "1.0.10",
     "react-sound": "^0.8.0",
     "recompose": "^0.24.0",

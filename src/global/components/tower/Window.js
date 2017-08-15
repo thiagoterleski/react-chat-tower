@@ -100,7 +100,9 @@ class Window extends Component {
     this.setState({ isOpen: false })
   }
   render() {
-    const {user} = this.props
+    const {user, lastUserMessage} = this.props
+    const isUserSpeaking = Boolean(lastUserMessage && user && user.id === lastUserMessage.user.id)
+    console.log(isUserSpeaking)
 
     return (
       <div
@@ -111,8 +113,8 @@ class Window extends Component {
         <div className={css(styles.sash)}>
           { user && (
             <div className={css(styles.user)}>
-              <VelocityComponent animation={(this.state.isOpen) ? Animations.up : Animations.down} duration={500}>
-                <SpeechBubble text={user.name} />
+              <VelocityComponent animation={(isUserSpeaking) ? Animations.up : Animations.down} duration={500}>
+                <SpeechBubble text={'(*)'} />
               </VelocityComponent>
               <img className={css(styles.userImg)} src={getAvatar(user.avatar)} width={36} />
             </div>

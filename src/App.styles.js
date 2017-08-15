@@ -17,11 +17,6 @@ const styles = StyleSheet.create({
   disabled: {
     pointerEvents: 'none',
   },
-  topBar: {
-    display: 'flex',
-    padding: 16,
-    justifyContent: 'space-between',
-  },
   chatButton: {
     position: 'fixed',
     bottom: 30,
@@ -37,26 +32,18 @@ const styles = StyleSheet.create({
     bottom: 50,
     left: 50,
   },
-  rightContent: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  avatarButton: {
-    width: 36,
-    height: 36,
-    backgroundColor: 'white',
-    borderRadius: 24,
-    display:' inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 8,
-  },
   dialogForm: {
     display: 'flex',
     'flexDirection': 'column',
   },
   dialogInput: {
     marginBottom: 4,
+  },
+  chatBox: {
+    position: 'fixed',
+    bottom: 80,
+    left: 40,
+    zIndex: 3,
   }
 })
 
