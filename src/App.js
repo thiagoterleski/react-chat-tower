@@ -107,6 +107,17 @@ class App extends Component {
     })
   }
 
+  pluralizeUserCounter = (count) => {
+    switch(count) {
+      case 0:
+        return 'no users'
+      case 1:
+        return `${count} user`
+      default:
+        return `${count} users`
+    }
+  }
+
   render() {
     const usersCount = Object.keys(this.state.users).length
 
@@ -168,7 +179,7 @@ class App extends Component {
           <div className={css(styles.usersStatus)} >
             <span className={css(globalStyles.bodyText)}>
 
-              {(usersCount) ? `${usersCount} users` : 'No one user'} in the <b>tower</b>
+              {this.pluralizeUserCounter(usersCount)} in the <b>tower</b>
 
           </span>
         </div>
