@@ -1,4 +1,4 @@
-import { StyleSheet, css } from 'aphrodite/no-important'
+import { StyleSheet } from 'aphrodite/no-important'
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   dialogForm: {
     display: 'flex',
-    'flexDirection': 'column',
+    flexDirection: 'column',
   },
   dialogInput: {
     marginBottom: 4,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     bottom: 80,
     left: 40,
     zIndex: 3,
-  }
+  },
 })
 
 export default styles

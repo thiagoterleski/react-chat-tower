@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, css } from 'aphrodite/no-important'
-import { globalStyles, palette, shadows, transitions } from '../../styles'
+import { palette, shadows, transitions } from '../../styles'
 
 const styles = StyleSheet.create({
   button: {
@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
     fontWeight: 500,
   },
   labeled: {
-    padding: '12px 16px',
-    borderRadius: 22,
-    boxShadow: shadows[1],
-    webkitFontSmoothing: 'antialiased',
-    display: 'flex',
-    alignItems: 'center',
+    'padding': '12px 16px',
+    'borderRadius': 22,
+    'boxShadow': shadows[1],
+    'webkitFontSmoothing': 'antialiased',
+    'display': 'flex',
+    'alignItems': 'center',
     ':hover': {
       boxShadow: shadows[4],
       transform: 'translateZ(-5px)',
@@ -44,28 +44,36 @@ const styles = StyleSheet.create({
   accent: {
     backgroundColor: palette.accent,
   },
-});
+})
 
-const Button = (props) => {
-  return (
-    <button
-      onClick={props.onClick}
-      className={css(
-        styles.button,
-        props.label && styles.labeled,
-        props.primary && styles.primary,
-        props.accent && styles.accent,
-      )}
-    >
-      { props.icon && (
-        <img className={css(styles.icon)} src={props.icon} width={24} height={24} />
-      ) }
-      { props.label && (
-        <span className={css(styles.label)}>{props.label}</span>
-      ) }
-      {props.children}
-    </button>
-  )
+const Button = (props) => (
+  <button
+    onClick={props.onClick}
+    className={css(
+      styles.button,
+      props.label && styles.labeled,
+      props.primary && styles.primary,
+      props.accent && styles.accent,
+    )}
+  >
+    { props.icon && (
+      <img className={css(styles.icon)} src={props.icon} width={24} height={24} />
+    ) }
+    { props.label && (
+      <span className={css(styles.label)}>{props.label}</span>
+    ) }
+    {props.children}
+  </button>
+)
+
+
+Button.propTypes = {
+  onClick: PropTypes.func,
+  label: PropTypes.string,
+  icon: PropTypes.element,
+  children: PropTypes.element,
+  primary: PropTypes.bool,
+  accent: PropTypes.bool,
 }
 
 export default Button
