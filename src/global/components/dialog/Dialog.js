@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, css } from 'aphrodite/no-important'
 import { globalStyles } from '../../../global/styles'
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.1)'
+    backgroundColor: 'rgba(0,0,0,0.1)',
   },
   container: {
     transform: 'perspective(500px)',
@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
   },
-});
+})
 
+// eslint-disable-next-line
 const Dialog = (props) => (props.open) ? (
   <div className={css(styles.dialog)}>
     <div className={css(styles.container)}>
@@ -60,6 +61,7 @@ Dialog.defaultProps = {
 Dialog.propTypes = {
   open: PropTypes.bool,
   title: PropTypes.string,
+  children: PropTypes.element,
 }
 
 export default Dialog

@@ -33,10 +33,16 @@ const NavBar = (props) => (
       <img src={Logo} width={120} />
     </div>
     <div className={css(styles.rightContent)}>
-      { (Object.keys(props.currentUser).length > 0) && (
+      { (Object.keys(props.currentUser).length > 0) ? (
         <div className={css(styles.userWidget)}>
           <span className={css(globalStyles.bodyText)}>{props.currentUser.name}</span>
           <ChooseAvatarButton onClick={props.onAvatarClick} containerStyle={css(styles.avatarButton)} />
+        </div>
+      ) : (
+        <div className={css(styles.userWidget)}>
+          <span className={css(globalStyles.bodyText)}>
+            You are not conected
+          </span>
         </div>
       ) }
     </div>

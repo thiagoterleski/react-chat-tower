@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import keydown, { Keys } from 'react-keydown'
+import keydown from 'react-keydown'
 import { StyleSheet, css } from 'aphrodite/no-important'
-import { shallowEqual } from 'recompose'
 import { globalStyles } from '../../styles'
-import io from 'socket.io-client'
 import { socket } from '../../../App'
 
 const styles = StyleSheet.create({
@@ -18,10 +16,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   input: {
-    backgroundColor: 'transparent',
+    'backgroundColor': 'transparent',
     ':focus': {
       borderColor: 'white',
-    }
+    },
   },
   messageItem: {
     display: 'inline-flex',
@@ -39,7 +37,7 @@ const styles = StyleSheet.create({
   messageText: {
     fontSize: 12,
   },
-});
+})
 
 class Chat extends Component {
   constructor() {
@@ -49,24 +47,20 @@ class Chat extends Component {
     }
   }
 
-  componentWillReceiveProps( { keydown } ) {
-    if ( keydown.event ) {
+  componentWillReceiveProps({ keydown }) {
+    if (keydown.event) {
       this.chatInput.focus()
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return true
-  }
-  componentDidUpdate(prevProps, prevState) {
-    console.info('Chat::componentDidUpdate', this.props)
-  }
   /**
    * [handleSubmit form]
    */
   handleSubmit = (event) => {
     event.preventDefault()
     const message = this.state.message
+
+    // TODO - Fix this operation 're-render'
     this.setState({ message: '' }, () => {
       socket.emit('sendMessage', { message })
     })
@@ -86,8 +80,15 @@ class Chat extends Component {
         <div className={css(styles.messages)}>
           { this.props.messages.map((message, i) => (
             <div key={`message_${i}`} className={css(styles.messageItem)} style={{ backgroundColor: message.user.color }}>
-              <span className={css(globalStyles.bodyText, styles.messageUser)}>{message.user.name}:</span>
-              <span className={css(globalStyles.bodyText, styles.messageText)}>{message.message}</span>
+              <span
+                className={css(globalStyles.bodyText, styles.messageUser)}
+              >
+                {message.user.name}:</span>
+              <span
+                className={css(globalStyles.bodyText, styles.messageText)}
+              >
+                {message.message}
+              </span>
             </div>
           )) }
         </div>
@@ -119,9 +120,8 @@ Chat.defaultProps = {
 
 Chat.propTypes = {
   messages: PropTypes.array,
-  currentUser: PropTypes.object.isRequired,
 }
 
-const KEYS = [ 'ctrl+enter', 'command+enter' ];
+const KEYS = ['ctrl+enter', 'command+enter']
 
 export default keydown(KEYS)(Chat)

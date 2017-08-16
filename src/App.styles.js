@@ -1,10 +1,10 @@
-import { StyleSheet, css } from 'aphrodite/no-important'
+import { StyleSheet } from 'aphrodite/no-important'
 
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#F5F5F5',
     padding: 20,
-    filter: 'contrast(1)',
+    filter: 'contrast(.3)',
   },
   container: {
     background: 'linear-gradient(#d6e5ff, #82B1FF)',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   dialogForm: {
     display: 'flex',
-    'flexDirection': 'column',
+    flexDirection: 'column',
   },
   dialogInput: {
     marginBottom: 4,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     bottom: 80,
     left: 40,
     zIndex: 3,
-  }
+  },
 })
 
 export default styles

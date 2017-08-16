@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, css } from 'aphrodite/no-important'
+import { globalStyles } from '../../styles'
 
 const styles = StyleSheet.create({
   speechBubble: {
@@ -11,9 +12,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     position: 'absolute',
     top: '-30px',
-    right: '-25px',
+    width: 60,
+    right: '-30px',
     boxShadow: 'rgba(0, 0, 0, 0.25) 1px 1px 2px',
-    fontFamily: 'monospace',
     ':after': {
       content: '""',
       position: 'absolute',
@@ -28,20 +29,28 @@ const styles = StyleSheet.create({
       marginLeft: '-10px',
       marginBottom: '-15px',
     }
-  }
+  },
+  posLeft: {
+    right: 0,
+    ':after': {
+      borderRight: 0,
+      borderLeft: 'auto',
+    },
+  },
 
 });
 
 const SpeechBubble = (props) => {
   return (
-    <div className={css(styles.speechBubble)}>
+    <div className={css(globalStyles.bodyText, styles.speechBubble, props.position === 'left' && styles.posLeft)}>
       {props.text}
     </div>
   )
 }
 
 SpeechBubble.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  position: PropTypes.string.isRequired,
 }
 
 export default SpeechBubble
