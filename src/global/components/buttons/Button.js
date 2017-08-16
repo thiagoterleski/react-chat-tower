@@ -70,7 +70,7 @@ const Button = (props) => (
 Button.propTypes = {
   onClick: PropTypes.func,
   label: PropTypes.string,
-  icon: PropTypes.element,
+  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   children: PropTypes.element,
   primary: PropTypes.bool,
   accent: PropTypes.bool,

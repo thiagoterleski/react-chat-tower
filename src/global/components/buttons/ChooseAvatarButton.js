@@ -13,7 +13,7 @@ const ChooseAvatarButton = (props) => (
 
 
 ChooseAvatarButton.propTypes = {
-  containerStyle: PropTypes.object,
+  containerStyle: PropTypes.string,
   onClick: PropTypes.func,
 }
 

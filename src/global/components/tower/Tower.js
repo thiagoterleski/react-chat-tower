@@ -5,14 +5,20 @@ import { shallowEqual } from 'recompose'
 import UpperFloor from './UpperFloor'
 
  // eslint-disable-next-line
-Object.defineProperty(Array.prototype, 'chunk', {
-  value: (chunkSize) => {
-    const that = this
+ Array.prototype.chunk = function(groupsize){
+   const sets = []
+   let chunks = 0
+   let i = 0
 
-    return Array(Math.ceil(that.length / chunkSize)).fill()
-    .map((_, i) => that.slice(i * chunkSize, (i * chunkSize) + chunkSize))
-  },
-})
+   chunks = this.length / groupsize
+
+   while (i < chunks) {
+     sets[i] = this.splice(0, groupsize)
+     i += 1
+   }
+
+   return sets
+ }
 
 const styles = StyleSheet.create({
   tower: {
