@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, css } from 'aphrodite/no-important'
 import BackgroundCity from '../../../assets/images/background-towers.svg'
 
@@ -24,17 +25,18 @@ const styles = StyleSheet.create({
     width: '100%',
     bottom: 5,
   },
-});
+})
 
-const Landscape = (props) => {
-  return (
-    <div className={css(styles.landscape)}>
-      { props.children }
-      <div className={css(styles.overFloor)}>
-      </div>
-      <div className={css(styles.floor)} />
-    </div>
-  )
+const Landscape = (props) => (
+  <div className={css(styles.landscape)}>
+    { props.children }
+    <div className={css(styles.overFloor)} />
+    <div className={css(styles.floor)} />
+  </div>
+)
+
+Landscape.propTypes = {
+  children: PropTypes.element,
 }
 
 export default Landscape

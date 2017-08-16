@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import SpeechBubble from './SpeechBubble'
+import PropTypes from 'prop-types'
 import { StyleSheet, css } from 'aphrodite/no-important'
-import { VelocityComponent } from 'velocity-react';
-import velocityHelpers from 'velocity-react/src/velocity-helpers';
-import Boy from '../../../assets/images/avatars/user-1.svg'
+import { VelocityComponent } from 'velocity-react'
+import velocityHelpers from 'velocity-react/src/velocity-helpers'
+import SpeechBubble from './SpeechBubble'
 
 require('velocity-animate')
 require('velocity-animate/velocity.ui')
-
-
 
 const styles = StyleSheet.create({
   window: {
@@ -22,13 +20,12 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   sash: {
-    height: 40,
-    backgroundColor: '#81A8CD',
-    border: 'white solid 2px',
-    position: 'relative',
-    marginLeft: 2,
-    marginRight: 2,
-    position: 'relative',
+    'height': 40,
+    'backgroundColor': '#81A8CD',
+    'border': 'white solid 2px',
+    'position': 'relative',
+    'marginLeft': 2,
+    'marginRight': 2,
     ':before': {
       content: '""',
       position: 'absolute',
@@ -37,7 +34,7 @@ const styles = StyleSheet.create({
       width: '100%',
       backgroundColor: 'white',
       left: 0,
-    }
+    },
   },
   sashOpen: {
     height: 20,
@@ -54,35 +51,34 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -8,
     zIndex: 2,
-  }
-});
+  },
+})
 
 const Animations = {
   up: velocityHelpers.registerEffect({
     defaultDuration: 200,
     calls: [
       [{
-        transformOriginX: [ '50%', '50%' ],
-        transformOriginY: [ '100%', '100%' ],
+        transformOriginX: ['50%', '50%'],
+        transformOriginY: ['100%', '100%'],
         scale: 1,
-      }]
+      }],
     ],
   }),
   down: velocityHelpers.registerEffect({
     defaultDuration: 200,
     calls: [
       [{
-        transformOriginX: [ '50%', '50%' ],
-        transformOriginY: [ '100%', 0 ],
+        transformOriginX: ['50%', '50%'],
+        transformOriginY: ['100%', 0],
         scale: 0,
-      }]
+      }],
     ],
   }),
 }
 
-const getAvatar = (avatar) => {
-  return require(`../../../assets/images/avatars/${avatar}.png`)
-}
+// eslint-disable-next-line
+const getAvatar = (avatar) => require(`../../../assets/images/avatars/${avatar}.png`)
 
 class Window extends Component {
   constructor() {
@@ -100,16 +96,18 @@ class Window extends Component {
     this.setState({ isOpen: false })
   }
   render() {
-    const {user, lastUserMessage, position} = this.props
+    const { user, lastUserMessage, position } = this.props
     const isUserSpeaking = Boolean(lastUserMessage && user && user.id === lastUserMessage.user.id)
 
     if (isUserSpeaking) console.log(lastUserMessage)
 
     return (
+      // eslint-disable-next-line
       <div
         onMouseEnter={this.whenMouseEntered}
         onMouseLeave={this.whenMouseLeft}
-        className={css(styles.window)}>
+        className={css(styles.window)}
+      >
         <div className={css(styles.lintel)} />
         <div className={css(styles.sash)}>
           { user && (
@@ -118,9 +116,14 @@ class Window extends Component {
                 animation={(isUserSpeaking) ? Animations.up : Animations.down}
                 duration={300}
               >
-                  <SpeechBubble position={position} text={isUserSpeaking ? lastUserMessage.message : ''} />
+                <SpeechBubble position={position} text={isUserSpeaking ? lastUserMessage.message : ''} />
               </VelocityComponent>
-              <img className={css(styles.userImg)} src={getAvatar(user.avatar)} width={36} />
+              <img
+                alt={user.name}
+                className={css(styles.userImg)}
+                src={getAvatar(user.avatar)}
+                width={36}
+              />
             </div>
           ) }
           <div className={css(styles.sashOpen)} />
@@ -130,6 +133,12 @@ class Window extends Component {
       </div>
     )
   }
+}
+
+Window.propTypes = {
+  position: PropTypes.string,
+  lastUserMessage: PropTypes.object,
+  user: PropTypes.object,
 }
 
 export default Window

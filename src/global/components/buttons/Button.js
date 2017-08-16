@@ -57,7 +57,7 @@ const Button = (props) => (
     )}
   >
     { props.icon && (
-      <img className={css(styles.icon)} src={props.icon} width={24} height={24} />
+      <img alt="icon" className={css(styles.icon)} src={props.icon} width={24} height={24} />
     ) }
     { props.label && (
       <span className={css(styles.label)}>{props.label}</span>

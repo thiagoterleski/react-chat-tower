@@ -6,7 +6,7 @@ import Button from './Button'
 const ChatButton = (props) => (
   <div className={props.containerStyle || null}>
     <Button onClick={props.onClick}>
-      <img src={Icon} width={48} height={48} />
+      <img alt="Chat button" src={Icon} width={48} height={48} />
     </Button>
   </div>
 )
