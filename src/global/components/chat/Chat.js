@@ -87,7 +87,7 @@ class Chat extends Component {
               <span
                 className={css(globalStyles.bodyText, styles.messageText)}
               >
-                {message.message}
+                {message.message.substring(0, 50)}{message.message.length > 50 && '...'}
               </span>
             </div>
           )) }

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     'padding': 5,
     'fontSize': 12,
     'position': 'absolute',
-    'top': '-30px',
+    'bottom': '46px',
     'width': 60,
     'right': '-30px',
     'boxShadow': 'rgba(0, 0, 0, 0.25) 1px 1px 2px',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
 const SpeechBubble = (props) => (
   <div className={css(globalStyles.bodyText, styles.speechBubble, props.position === 'left' && styles.posLeft)}>
-    {props.text}
+    {props.text.substring(0, 30)}{props.text.length > 30 && '...'}
   </div>
 )
 
