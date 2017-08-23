@@ -12,7 +12,7 @@ const render = () => {
 
 render(App)
 
-if (module.hot) {
+if (!module.hot) {
   module.hot.accept('./App', () => {
     // eslint-disable-next-line
     const NextApp = require('./App').default

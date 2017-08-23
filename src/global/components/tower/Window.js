@@ -99,8 +99,6 @@ class Window extends Component {
     const { user, lastUserMessage, position } = this.props
     const isUserSpeaking = Boolean(lastUserMessage && user && user.id === lastUserMessage.user.id)
 
-    if (isUserSpeaking) console.log(lastUserMessage)
-
     return (
       // eslint-disable-next-line
       <div

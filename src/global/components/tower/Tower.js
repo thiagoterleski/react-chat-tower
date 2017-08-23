@@ -88,7 +88,9 @@ class Tower extends Component {
       return <UpperFloor />
     }
 
-    return users.chunk(2)
+    const cloneChunkedArray = users.slice(0)
+
+    return cloneChunkedArray.chunk(2)
       .reverse()
       .map((group, i) => <UpperFloor users={group} lastUserMessage={lastUserMessage} key={`UpperFloor_${i}`} />)
   }
@@ -110,6 +112,7 @@ class Tower extends Component {
 
 Tower.propTypes = {
   lastUserMessage: PropTypes.object,
+  users: PropTypes.array,
   users: PropTypes.array,
 }
 

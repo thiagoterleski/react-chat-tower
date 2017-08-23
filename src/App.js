@@ -17,6 +17,7 @@ class App extends Component {
       isConnected: false,
       isInputModalOpen: false,
       users: [],
+      users_online: [],
       lastUserMessage: null,
       userName: '',
       chat: {
@@ -90,7 +91,7 @@ class App extends Component {
   }
 
   pluralizeUserCounter = (count) => {
-    switch(count) {
+    switch (count) {
       case 0:
         return 'no users'
       case 1:
