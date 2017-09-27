@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
   messageText: {
     fontSize: 12,
   },
+  countMessage: {
+    display: 'block',
+    marginTop: 4,
+  }
 })
 
 class Chat extends Component {
@@ -45,6 +49,7 @@ class Chat extends Component {
     this.state = {
       message: '',
     }
+    this.messageMaxLength = 10
   }
 
   componentWillReceiveProps({ keydown }) {
@@ -71,8 +76,11 @@ class Chat extends Component {
    * @return {[type]}       [description]
    */
   handleChange = (event) => {
+
+    if (this.state.message.length < this.messageMaxLength || (event.target.value.length < this.messageMaxLength))
     this.setState({ message: event.target.value })
   }
+
 
   render() {
     return (
@@ -108,6 +116,11 @@ class Chat extends Component {
                   styles.input,
                 )}
             />
+            { (this.state.message.length > 0) && (
+              <span className={css(globalStyles.bodyText, styles.countMessage)}>
+                { `You have ${this.state.message.length} of ${this.messageMaxLength} characters` }
+              </span>
+            ) }
           </form>
         </div>
       </div>
